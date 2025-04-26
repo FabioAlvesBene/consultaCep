@@ -1,6 +1,7 @@
 package br.com.fabioalvesbene.consultacep.app;
 
 import br.com.fabioalvesbene.consultacep.model.Endereco;
+import br.com.fabioalvesbene.consultacep.util.MensagemEndereco;
 import br.com.fabioalvesbene.consultacep.service.ConsultaCep;
 import br.com.fabioalvesbene.consultacep.util.GeradorDeArquivo;
 
@@ -14,15 +15,10 @@ public class Principal {
         String cepDigitado = JOptionPane.showInputDialog("Informe o cep para consulta");
 
         try {
+            // Consulta o CEP digitado e retorna o endereço correspondente
             Endereco novoEndereco = consultaCep.buscaEndereco(cepDigitado);
 
-            // Monta a mensagem usando o record
-            String mensagem = "Endereço encontrado:\n" +
-                    "CEP: " + novoEndereco.cep() + "\n" +
-                    "Logradouro: " + novoEndereco.logradouro() + "\n" +
-                    "Cidade: " + novoEndereco.localidade() + "\n" +
-                    "Estado: " + novoEndereco.uf();
-
+            String mensagem = MensagemEndereco.formatar(novoEndereco);
             JOptionPane.showMessageDialog(null, mensagem);
 
             //System.out.println(novoEndereco);
